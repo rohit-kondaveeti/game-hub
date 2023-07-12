@@ -8,11 +8,11 @@ interface props {
   selectedGenre: Genre | null;
 }
 const GameGrid = ({ selectedGenre }: props) => {
-  const { Data, Error, isLoading } = useGames(selectedGenre);
+  const { data, error, isLoading } = useGames(selectedGenre);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <>
-      {Error && <Text>{Error}</Text>}
+      {error && <Text>{error}</Text>}
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
         padding="10px"
@@ -25,7 +25,7 @@ const GameGrid = ({ selectedGenre }: props) => {
               <GameCardSkeleton key={skeleton} />{" "}
             </GameCardContainer>
           ))}
-        {Data.map((game) => (
+        {data.map((game) => (
           <GameCardContainer key={game.id}>
             <GameCard key={game.id} game={game} />
           </GameCardContainer>
